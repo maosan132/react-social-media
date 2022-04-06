@@ -29,14 +29,10 @@ const App = () => {
     console.log(inputValue);
   }
   return (<Layout >
-    {/* {isAuthenticated ? <Header username="React" lastName="User" /> : <Login />}
-    {isAuthenticated && <SignOUt />} short circuiting operation */}
+
     {isAuthenticated ? (
       <>
         <Header username="React" lastName="User" />
-        {/* <ul>
-          {people.map(person => <li>{person}</li>)}
-        </ul> */}
         <ul>
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
