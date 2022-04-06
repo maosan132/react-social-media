@@ -1,20 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// class Header extends React.Component {
-//   render () {
-//     return (
-//       <div>
-//         <h1>Hello old World</h1>
-//       </div>
-//     );
-//   }
-// }
-
-// function Header() {
-//   return <h1>Hello everybody!</h1>
-// }
-
 const Header = (props) => <h1>Hello {props.username} {props.lastName} at {year}</h1>
 
 const Layout = (props) => <div style={{backgroundColor: 'aquamarine'}}>{props.children}</div>
@@ -36,22 +22,6 @@ const rootNode = document.getElementById('root');
 const isReactUser = true;
 
 const isAuthenticated = true;
-
-// if (isReactUser) {
-//     ReactDOM.render(greeting, rootNode);
-// } else {
-//     ReactDOM.render(anotherGreeting, rootNode);
-// }
-
-// function greet() {
-//   if (isReactUser) {
-//     return greeting;
-//   } else {
-//     return anotherGreeting;
-//   }
-// }
-
-// ReactDOM.render(greet(), rootNode);
 
 ReactDOM.render(
   <Layout >
