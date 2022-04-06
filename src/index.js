@@ -7,7 +7,9 @@ const Layout = (props) => <div style={{backgroundColor: 'aquamarine'}}>{props.ch
 
 const Login = () => <div><p>Please Login first</p><button>Login</button></div>
 
-const SignOUt = () => <button>Exit</button>
+const SignOut = () => <button>Exit</button>
+
+const Person = (props) => <li>{props.person} {props.i}</li>
 
 const greeting = (
   <div>
@@ -19,16 +21,23 @@ const greeting = (
 const year = new Date().getFullYear();
 const rootNode = document.getElementById('root');
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const App = () => {
+  const people = ['John', 'Jane', 'Mary'];
   return (<Layout >
     {/* {isAuthenticated ? <Header username="React" lastName="User" /> : <Login />}
     {isAuthenticated && <SignOUt />} short circuiting operation */}
     {isAuthenticated ? (
       <>
         <Header username="React" lastName="User" />
-        <SignOUt />
+        {/* <ul>
+          {people.map(person => <li>{person}</li>)}
+        </ul> */}
+        <ul>
+          {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
+        </ul>
+        <SignOut />
       </>
     ) :
     <Login />
