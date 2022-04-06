@@ -17,14 +17,12 @@ const greeting = (
   </div>
   );
 const year = new Date().getFullYear();
-const anotherGreeting = <div>  bye guys! {year}</div>;
 const rootNode = document.getElementById('root');
-const isReactUser = true;
 
-const isAuthenticated = true;
+const isAuthenticated = false;
 
-ReactDOM.render(
-  <Layout >
+const App = () => {
+  return (<Layout >
     {/* {isAuthenticated ? <Header username="React" lastName="User" /> : <Login />}
     {isAuthenticated && <SignOUt />} short circuiting operation */}
     {isAuthenticated ? (
@@ -36,6 +34,9 @@ ReactDOM.render(
     <Login />
     }
     <footer>Copyright 2022</footer>
-  </Layout>,
-  rootNode
+  </Layout>)
+}
+
+ReactDOM.render(
+  < App />, rootNode
 );
