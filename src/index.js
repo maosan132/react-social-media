@@ -16,13 +16,6 @@ const Person = (props) => {
   return <li style={{cursor: 'pointer'}} onClick={handlePersonClick}>{props.person} {props.i}</li>
 }
 
-const greeting = (
-  <div>
-    <h1>Hello guys!</h1>
-  <p>Welcome to React!</p>
-  <button style={{backgroundColor: 'blue'}}>submit</button>
-  </div>
-  );
 const year = new Date().getFullYear();
 const rootNode = document.getElementById('root');
 
@@ -30,6 +23,11 @@ const isAuthenticated = true;
 
 const App = () => {
   const people = ['John', 'Jane', 'Mary'];
+
+  function handleInputChange(event) {
+    const inputValue = event.target.value;
+    console.log(inputValue);
+  }
   return (<Layout >
     {/* {isAuthenticated ? <Header username="React" lastName="User" /> : <Login />}
     {isAuthenticated && <SignOUt />} short circuiting operation */}
@@ -42,6 +40,7 @@ const App = () => {
         <ul>
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
+        <input onChange={handleInputChange} />
         <SignOut />
       </>
     ) :
