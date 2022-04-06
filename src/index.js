@@ -9,7 +9,12 @@ const Login = () => <div><p>Please Login first</p><button>Login</button></div>
 
 const SignOut = () => <button>Exit</button>
 
-const Person = (props) => <li>{props.person} {props.i}</li>
+const Person = (props) => {
+  function handlePersonClick(event) {
+    console.log('Person clicked', props.person, event);
+  }
+  return <li style={{cursor: 'pointer'}} onClick={handlePersonClick}>{props.person} {props.i}</li>
+}
 
 const greeting = (
   <div>
