@@ -22,12 +22,14 @@ const rootNode = document.getElementById('root');
 const isAuthenticated = true;
 
 const App = () => {
+  const [inputValue, setInputValue] = React.useState('');
+
   const people = ['John', 'Jane', 'Mary'];
 
   function handleInputChange(event) {
-    const inputValue = event.target.value;
-    console.log(inputValue);
+    setInputValue(event.target.value);
   }
+
   return (<Layout >
 
     {isAuthenticated ? (
@@ -37,6 +39,8 @@ const App = () => {
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
         <input onChange={handleInputChange} />
+        <p>{inputValue}</p>
+        <br /><br />
         <SignOut />
       </>
     ) :
