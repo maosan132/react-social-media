@@ -21,8 +21,12 @@ const rootNode = document.getElementById('root');
 
 const isAuthenticated = true;
 
+// APP HERE
+
 const App = () => {
   const [inputValue, setInputValue] = React.useState('');
+  const [language, setLanguage] = React.useState('Python');
+  const [experience, setExperience] = React.useState(0);
 
   const people = ['John', 'Jane', 'Mary'];
 
@@ -40,6 +44,16 @@ const App = () => {
         </ul>
         <input onChange={handleInputChange} />
         <p>{inputValue}</p>
+        <div>
+          <button onClick={() => setLanguage('Javascript')}>Change Language to Javascript</button>    <br />
+              <input
+            type='number'
+            onChange={(event) => setExperience(event.target.value)}
+          />
+          <p>I am learning {language}</p>
+          <span>Experience: </span>
+          <p>Years of experience: {experience}</p>
+        </div>
         <br /><br />
         <SignOut />
       </>
