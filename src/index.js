@@ -35,6 +35,13 @@ const App = () => {
     setDeveloperInfo({...developerInfo, inputValue: event.target.value});
   }
 
+  function handleLanguageChange() {
+    setDeveloperInfo({experience: 0, language: 'Javascript'});
+  }
+
+  function handleExperienceChange(event) {
+    setDeveloperInfo({...developerInfo, experience: event.target.value});
+  }
   return (<Layout >
 
     {isAuthenticated ? (
@@ -46,10 +53,10 @@ const App = () => {
         <input onChange={handleInputChange} />
         <p>{developerInfo.inputValue}</p>
         <div>
-          <button onClick={() => setDeveloperInfo({...developerInfo, language: 'Javascript'})}>Change Language to Javascript</button>    <br />
+          <button onClick={handleLanguageChange}>Change Language to Javascript</button>    <br />
           <input
             type='number'
-            onChange={(event) => setDeveloperInfo({...developerInfo, experience: event.target.value})}
+            onChange={handleExperienceChange}
           />
           <p>I am learning {developerInfo.language}</p>
           <span>Experience: </span>
