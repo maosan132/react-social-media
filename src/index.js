@@ -24,14 +24,15 @@ const isAuthenticated = true;
 // APP HERE
 
 const App = () => {
-  const [inputValue, setInputValue] = React.useState('');
-  const [language, setLanguage] = React.useState('Python');
-  const [experience, setExperience] = React.useState(0);
-
+  const [developerInfo, setDeveloperInfo] = React.useState({
+    inputValue: '',
+    language: 'Python',
+    experience: 0
+  });
   const people = ['John', 'Jane', 'Mary'];
 
   function handleInputChange(event) {
-    setInputValue(event.target.value);
+    setDeveloperInfo({...developerInfo, inputValue: event.target.value});
   }
 
   return (<Layout >
@@ -43,16 +44,16 @@ const App = () => {
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
         <input onChange={handleInputChange} />
-        <p>{inputValue}</p>
+        <p>{developerInfo.inputValue}</p>
         <div>
-          <button onClick={() => setLanguage('Javascript')}>Change Language to Javascript</button>    <br />
-              <input
+          <button onClick={() => setDeveloperInfo({...developerInfo, language: 'Javascript'})}>Change Language to Javascript</button>    <br />
+          <input
             type='number'
-            onChange={(event) => setExperience(event.target.value)}
+            onChange={(event) => setDeveloperInfo({...developerInfo, experience: event.target.value})}
           />
-          <p>I am learning {language}</p>
+          <p>I am learning {developerInfo.language}</p>
           <span>Experience: </span>
-          <p>Years of experience: {experience}</p>
+          <p>Years of experience: {developerInfo.experience}</p>
         </div>
         <br /><br />
         <SignOut />
