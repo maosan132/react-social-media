@@ -27,7 +27,8 @@ const App = () => {
   const [developerInfo, setDeveloperInfo] = React.useState({
     inputValue: '',
     language: 'Python',
-    experience: 0
+    experience: 0,
+    isEmployed: false,
   });
   const people = ['John', 'Jane', 'Mary'];
 
@@ -42,6 +43,11 @@ const App = () => {
   function handleExperienceChange(event) {
     setDeveloperInfo({...developerInfo, experience: event.target.value});
   }
+
+  const handleToggleEmployment = () => {
+    setDeveloperInfo(prevState => ({...prevState, isEmployed: !prevState.isEmployed}));
+  }
+
   return (<Layout >
 
     {isAuthenticated ? (
@@ -58,9 +64,14 @@ const App = () => {
             type='number'
             onChange={handleExperienceChange}
           />
+        <br />
+        <button onClick={handleToggleEmployment}>
+          Toggle employment status
+        </button>
           <p>I am learning {developerInfo.language}</p>
           <span>Experience: </span>
           <p>Years of experience: {developerInfo.experience}</p>
+          <p>Employment status: {developerInfo.isEmployed ? 'Employed' : 'Unemployed' } </p>
         </div>
         <br /><br />
         <SignOut />
