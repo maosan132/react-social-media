@@ -25,8 +25,8 @@ const isAuthenticated = true;
 
 const App = () => {
   const [developerInfo, setDeveloperInfo] = React.useState({
-    name: 'Maurice',
-    inputValue: '',
+    tabName: 'Maurice',
+    inputValue: 'Comments here',
     language: 'Python',
     experience: 0,
     isEmployed: false,
@@ -34,8 +34,8 @@ const App = () => {
   const people = ['John', 'Jane', 'Mary'];
 
   React.useEffect(() => {
-    document.title = developerInfo.name
-  });
+    document.title = developerInfo.tabName
+  }, [developerInfo.tabName]);
 
   function handleInputChange(event) {
     setDeveloperInfo({...developerInfo, inputValue: event.target.value});
@@ -53,8 +53,8 @@ const App = () => {
     setDeveloperInfo(prevState => ({...prevState, isEmployed: !prevState.isEmployed}));
   }
 
-  const handleChangeName = () => {
-    setDeveloperInfo(prevState => ({...prevState, name: 'Maurice'}));
+  const handleChangeTabName = (event) => {
+    setDeveloperInfo(prevState => ({...prevState, tabName: event.target.value}));
   }
 
   return (<Layout >
@@ -65,24 +65,24 @@ const App = () => {
         <ul>
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
-        <input onChange={handleInputChange} />
+        <span>Add a comment: </span><input onChange={handleInputChange} />
         <p>{developerInfo.inputValue}</p>
         <div>
-          <button onClick={handleLanguageChange}>Change Language to Javascript</button>    <br />
-          <input
+          <span>Change Language to Javascript: </span><button onClick={handleLanguageChange}>GO</button>    <br />
+          <span>Experience years: </span><input
             type='number'
             onChange={handleExperienceChange}
-          />
+          /><br />
+          <span>Browser tab name: </span>
           <input
             type='text'
-            onChange={handleChangeName}
+            onChange={handleChangeTabName}
           />
           <br />
-          <button onClick={handleToggleEmployment}>
-          Toggle employment status
+          <span>Toggle employment status: </span><button onClick={handleToggleEmployment}>
+          Go
           </button>
           <p>I am learning {developerInfo.language}</p>
-          <span>Experience: </span>
           <p>Years of experience: {developerInfo.experience}</p>
           <p>Employment status: {developerInfo.isEmployed ? 'Employed' : 'Unemployed' } </p>
         </div>
