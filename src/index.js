@@ -24,6 +24,7 @@ const isAuthenticated = true;
 // APP HERE
 
 const App = () => {
+  const people = ['John', 'Jane', 'Mary'];
   const [developerInfo, setDeveloperInfo] = React.useState({
     tabName: 'Maurice',
     inputValue: 'Comments here',
@@ -31,11 +32,28 @@ const App = () => {
     experience: 0,
     isEmployed: false,
   });
-  const people = ['John', 'Jane', 'Mary'];
+  const [mousePosition, setMousePosition] = React.useState({
+    x: 0,
+    y: 0
+  });
 
   React.useEffect(() => {
     document.title = developerInfo.tabName
   }, [developerInfo.tabName]);
+
+  React.useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  function handleMouseMove(event) {
+    setMousePosition({
+      x: event.pageX,
+      y: event.pageY
+    });
+  };
 
   function handleInputChange(event) {
     setDeveloperInfo({...developerInfo, inputValue: event.target.value});
@@ -56,6 +74,8 @@ const App = () => {
   const handleChangeTabName = (event) => {
     setDeveloperInfo(prevState => ({...prevState, tabName: event.target.value}));
   }
+
+  // const Coordinates
 
   return (<Layout >
 
@@ -86,7 +106,7 @@ const App = () => {
           <p>Years of experience: {developerInfo.experience}</p>
           <p>Employment status: {developerInfo.isEmployed ? 'Employed' : 'Unemployed' } </p>
         </div>
-        <br /><br />
+        <p>Mouse position: {mousePosition.x}, {mousePosition.y}</p>
         <SignOut />
       </>
     ) :
@@ -99,3 +119,13 @@ const App = () => {
 ReactDOM.render(
   < App />, rootNode
 );
+
+const NewPage = () => {
+  return <Layout>
+    <Header username="New" lastName="Page" />
+   <div>  New page here </div>
+   <br />
+  </Layout>
+};
+
+setTimeout(() => ReactDOM.render(<NewPage/>, rootNode), 2000);
