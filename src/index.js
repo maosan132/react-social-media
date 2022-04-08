@@ -25,12 +25,17 @@ const isAuthenticated = true;
 
 const App = () => {
   const [developerInfo, setDeveloperInfo] = React.useState({
+    name: 'Maurice',
     inputValue: '',
     language: 'Python',
     experience: 0,
     isEmployed: false,
   });
   const people = ['John', 'Jane', 'Mary'];
+
+  React.useEffect(() => {
+    document.title = developerInfo.name
+  });
 
   function handleInputChange(event) {
     setDeveloperInfo({...developerInfo, inputValue: event.target.value});
@@ -46,6 +51,10 @@ const App = () => {
 
   const handleToggleEmployment = () => {
     setDeveloperInfo(prevState => ({...prevState, isEmployed: !prevState.isEmployed}));
+  }
+
+  const handleChangeName = () => {
+    setDeveloperInfo(prevState => ({...prevState, name: 'Maurice'}));
   }
 
   return (<Layout >
@@ -64,10 +73,14 @@ const App = () => {
             type='number'
             onChange={handleExperienceChange}
           />
-        <br />
-        <button onClick={handleToggleEmployment}>
+          <input
+            type='text'
+            onChange={handleChangeName}
+          />
+          <br />
+          <button onClick={handleToggleEmployment}>
           Toggle employment status
-        </button>
+          </button>
           <p>I am learning {developerInfo.language}</p>
           <span>Experience: </span>
           <p>Years of experience: {developerInfo.experience}</p>
