@@ -7,7 +7,9 @@ const Layout = (props) => <div style={{backgroundColor: 'aquamarine'}}>{props.ch
 
 const Login = () => <div><p>Please Login first</p><button>Login</button></div>
 
-const SignOut = () => <button>Exit</button>
+const SignOut = () => <button>SignOut</button>
+
+const endPoint = 'https://api.github.com/users/maosan132'
 
 const Person = (props) => {
   function handlePersonClick(event) {
@@ -32,6 +34,7 @@ const App = () => {
     experience: 0,
     isEmployed: false,
   });
+  const [user, setUser] = React.useState(null);
   const [mousePosition, setMousePosition] = React.useState({
     x: 0,
     y: 0
@@ -40,6 +43,12 @@ const App = () => {
   React.useEffect(() => {
     document.title = developerInfo.tabName
   }, [developerInfo.tabName]);
+
+  React.useEffect(() => {
+    fetch(endPoint)
+      .then(response => response.json())
+      .then(data => setUser(data))
+  }, []);
 
   React.useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove);
@@ -77,11 +86,15 @@ const App = () => {
 
   // const Coordinates
 
-  return (<Layout >
+  return user ? (<Layout >
 
     {isAuthenticated ? (
       <>
         <Header username="React" lastName="User" />
+        <img alt='avatar' src={user.avatar_url} style={{ height:50 }}/>
+        <br />
+        <strong>Github username: </strong> <span>{user.name}</span>
+        <p>{user.bio}</p>
         <ul>
           {people.map((person, i) => <Person key={i} person={person} i={i}/>)}
         </ul>
@@ -113,19 +126,19 @@ const App = () => {
     <Login />
     }
     <footer>Copyright 2022</footer>
-  </Layout>)
+  </Layout>) : <p>Loading...</p>
 }
 
 ReactDOM.render(
   < App />, rootNode
 );
 
-const NewPage = () => {
-  return <Layout>
-    <Header username="New" lastName="Page" />
-   <div>  New page here </div>
-   <br />
-  </Layout>
-};
+// const NewPage = () => {
+//   return <Layout>
+//     <Header username="New" lastName="Page" />
+//    <div>  New page here </div>
+//    <br />
+//   </Layout>
+// };
 
-setTimeout(() => ReactDOM.render(<NewPage/>, rootNode), 2000);
+// setTimeout(() => ReactDOM.render(<NewPage/>, rootNode), 2000);
