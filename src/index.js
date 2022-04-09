@@ -9,7 +9,7 @@ const Login = () => <div><p>Please Login first</p><button>Login</button></div>
 
 const SignOut = () => <button>SignOut</button>
 
-const endPoint = 'https://api.github.com/users/maosan132'
+const baseUrl = 'https://api.github.com/users/'
 
 const Person = (props) => {
   function handlePersonClick(event) {
@@ -35,19 +35,27 @@ const App = () => {
     isEmployed: false,
   });
   const [user, setUser] = React.useState(null);
-  const [mousePosition, setMousePosition] = React.useState({
-    x: 0,
-    y: 0
-  });
+  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+  const [username, setUsername] = React.useState('maosan132')
 
   React.useEffect(() => {
     document.title = developerInfo.tabName
   }, [developerInfo.tabName]);
 
+  // React.useEffect(() => {
+  //   fetch(baseUrl)
+  //     .then(response => response.json())
+  //     .then(data => setUser(data))
+  // }, []);
+
+  const getUser = async (route) => {
+  const response = await fetch(`${baseUrl}${route}`);
+  const data = await response.json();
+  setUser(data);
+  }
+
   React.useEffect(() => {
-    fetch(endPoint)
-      .then(response => response.json())
-      .then(data => setUser(data))
+    getUser(username);
   }, []);
 
   React.useEffect(() => {
@@ -84,13 +92,17 @@ const App = () => {
     setDeveloperInfo(prevState => ({...prevState, tabName: event.target.value}));
   }
 
-  // const Coordinates
-
   return user ? (<Layout >
 
     {isAuthenticated ? (
       <>
         <Header username="React" lastName="User" />
+        <div>
+          <input placeholder='Input Github User name' onChange={e => setUsername(e.target.value)}/>
+          <button onClick={() => getUser(username)}>Search</button>
+          <button>Clear</button>
+        </div>
+        <br />
         <img alt='avatar' src={user.avatar_url} style={{ height:50 }}/>
         <br />
         <strong>Github username: </strong> <span>{user.name}</span>
