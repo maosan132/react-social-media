@@ -48,14 +48,14 @@ const App = () => {
   //     .then(data => setUser(data))
   // }, []);
 
-  const getUser = async (route) => {
-  const response = await fetch(`${baseUrl}${route}`);
+  const getUser = async () => {
+  const response = await fetch(`${baseUrl}${username}`);
   const data = await response.json();
   setUser(data);
   }
 
   React.useEffect(() => {
-    getUser(username);
+    getUser();
   }, []);
 
   React.useEffect(() => {
@@ -99,7 +99,7 @@ const App = () => {
         <Header username="React" lastName="User" />
         <div>
           <input placeholder='Input Github User name' onChange={e => setUsername(e.target.value)}/>
-          <button onClick={() => getUser(username)}>Search</button>
+          <button onClick={getUser}>Search</button>
           <button>Clear</button>
         </div>
         <br />
