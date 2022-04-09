@@ -37,6 +37,7 @@ const App = () => {
   const [user, setUser] = React.useState(null);
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
   const [username, setUsername] = React.useState('maosan132')
+  const searchInput = React.useRef();
 
   React.useEffect(() => {
     document.title = developerInfo.tabName
@@ -92,15 +93,25 @@ const App = () => {
     setDeveloperInfo(prevState => ({...prevState, tabName: event.target.value}));
   }
 
+  const handleClearInput = () => {
+    searchInput.current.value = '';
+    searchInput.current.focus();
+  }
+
   return user ? (<Layout >
 
     {isAuthenticated ? (
       <>
         <Header username="React" lastName="User" />
         <div>
-          <input placeholder='Input Github User name' onChange={e => setUsername(e.target.value)}/>
+          <input
+            type='text'
+            placeholder='Input Github User name'
+            onChange={e => setUsername(e.target.value)}
+            ref={searchInput}
+          />
           <button onClick={getUser}>Search</button>
-          <button>Clear</button>
+          <button onClick={handleClearInput}>Clear</button>
         </div>
         <br />
         <img alt='avatar' src={user.avatar_url} style={{ height:50 }}/>
