@@ -13,7 +13,7 @@ const Login = ({setUser}) => {
     <h2>Login</h2>
     <form onSubmit={handleSubmit}>
       <label>
-        Username: 
+        Username:
         <input
           type="text"
           name="username"
