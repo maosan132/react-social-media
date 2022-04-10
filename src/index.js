@@ -34,14 +34,27 @@ const App = () => {
     experience: 0,
     isEmployed: false,
   });
-  const [user, setUser] = React.useState(null);
-  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-  const [username, setUsername] = React.useState('maosan132')
-  const searchInput = React.useRef();
 
   React.useEffect(() => {
     document.title = developerInfo.tabName
   }, [developerInfo.tabName]);
+
+  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const [username, setUsername] = React.useState('maosan132')
+  const [user, setUser] = React.useState(null);
+  const searchInput = React.useRef();
+
+  React.useEffect(() => {
+    getUser();
+  }, []);
 
   // React.useEffect(() => {
   //   fetch(baseUrl)
@@ -54,17 +67,6 @@ const App = () => {
   const data = await response.json();
   setUser(data);
   }
-
-  React.useEffect(() => {
-    getUser();
-  }, []);
-
-  React.useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
 
   function handleMouseMove(event) {
     setMousePosition({
@@ -86,11 +88,11 @@ const App = () => {
   }
 
   const handleToggleEmployment = () => {
-    setDeveloperInfo(prevState => ({...prevState, isEmployed: !prevState.isEmployed}));
+    setDeveloperInfo(prevStat => ({...prevStat, isEmployed: !prevStat.isEmployed}));
   }
 
   const handleChangeTabName = (event) => {
-    setDeveloperInfo(prevState => ({...prevState, tabName: event.target.value}));
+    setDeveloperInfo(prevStat => ({...prevStat, tabName: event.target.value}));
   }
 
   const handleClearInput = () => {
@@ -124,7 +126,8 @@ const App = () => {
         <span>Add a comment: </span><input onChange={handleInputChange} />
         <p>{developerInfo.inputValue}</p>
         <div>
-          <span>Change Language to Javascript: </span><button onClick={handleLanguageChange}>GO</button>    <br />
+          <span>Change Language to Javascript: </span>
+          <button onClick={handleLanguageChange}>GO</button>    <br />
           <span>Experience years: </span><input
             type='number'
             onChange={handleExperienceChange}
