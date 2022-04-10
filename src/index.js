@@ -6,12 +6,6 @@ const baseUrl = 'https://api.github.com/users/'
 const year = new Date().getFullYear();
 const rootNode = document.getElementById('root');
 
-// APP HERE
-
-const App = () => {
-
-  return <div></div>
-}
 
 ReactDOM.render(
   < App />, rootNode
