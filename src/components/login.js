@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Login = () => {
+const Login = ({setUser}) => {
   const [username, setUsername] = React.useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(username)
+    setUser(username)
   }
 
   return (
@@ -13,11 +13,11 @@ const Login = () => {
     <h2>Login</h2>
     <form onSubmit={handleSubmit}>
       <label>
-        Username:
+        Username: 
         <input
           type="text"
           name="username"
-          onChange={e => setUsername(e.target.value)}
+          onChange={e => setUsername(e.target.value)} //updates state
         />
         <button type='submit'>Submit</button>
       </label>
