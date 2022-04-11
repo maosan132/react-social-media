@@ -23,7 +23,6 @@ const App = () => {
       <Header user={user} setUser={setUser}/>
       <CreatePost user={user} setPosts={setPosts} posts={posts}/>
       {posts.length > 0 && <PostList posts={posts}/>}
-
     </>
   );
 }

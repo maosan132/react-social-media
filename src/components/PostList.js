@@ -1,4 +1,5 @@
 import React from 'react';
+import Post from './Post';
 
 const PostList = ({posts}) => {
   return (
@@ -6,15 +7,7 @@ const PostList = ({posts}) => {
       <h2>Post List</h2>
       {
         posts.map((post, i) => (
-          <div key={i} style={{border: 'solid 1px black', padding: 10, marginTop: 10}}>
-            {post.image && <img
-              src={URL.createObjectURL(post.image)}
-              alt='post cover'
-              style={{height: 200, width: '100%', objectFit: 'cover' }}
-            />}
-            <p>{post.content.title}</p>
-            <p>{post.content.body}</p>
-          </div>
+          <Post key={i} post={post}/>
         ))
       }
     </div>
@@ -22,4 +15,3 @@ const PostList = ({posts}) => {
 }
 
 export default PostList;
-
