@@ -22,10 +22,10 @@ const App = () => {
       <Header user={user} setUser={setUser}/>
       <CreatePost user={user} setPosts={setPosts} posts={posts}/>
       {posts.map((post, i) => (
-        <div style={{border: 'solid 1px black', padding: 10, marginTop: 10}}>
+        <div key={i} style={{border: 'solid 1px black', padding: 10, marginTop: 10}}>
         {post.image && <img
           src={URL.createObjectURL(post.image)}
-          alt={`Post ${i}`}
+          alt='post'
           style={{height: 200, width: '100%', objectFit: 'cover' }}
         />}
           <p>{post.content.title}</p>

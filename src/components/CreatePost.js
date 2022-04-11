@@ -12,6 +12,7 @@ const CreatePost = ({user, setPosts, posts}) => {
     const post = {content, image, user};
     const newPosts = [post, ...posts];
     setPosts(newPosts);
+    setContent({title: '', body: ''});
   }
 
   return (
@@ -22,11 +23,13 @@ const CreatePost = ({user, setPosts, posts}) => {
         <input
           type="text"
           onChange={e => setContent({ ...content, title: e.target.value })}
+          value={content.title}
         /><br />
         <label>Body: </label><br />
         <textarea
           placeholder='Add post content'
           onChange={e => setContent({ ...content, body: e.target.value })}
+          value={content.body}
         /><br />
         <label>Add image: </label><br />
         <input
