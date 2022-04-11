@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Login from './components/login';
 import Header from './components/Header';
 import CreatePost from './components/CreatePost';
+import PostList from './components/PostList';
 
 // APP HERE
 
@@ -21,17 +22,8 @@ const App = () => {
     <>
       <Header user={user} setUser={setUser}/>
       <CreatePost user={user} setPosts={setPosts} posts={posts}/>
-      {posts.map((post, i) => (
-        <div key={i} style={{border: 'solid 1px black', padding: 10, marginTop: 10}}>
-        {post.image && <img
-          src={URL.createObjectURL(post.image)}
-          alt='post'
-          style={{height: 200, width: '100%', objectFit: 'cover' }}
-        />}
-          <p>{post.content.title}</p>
-          <p>{post.content.body}</p>
-        </div>
-      ))}
+      {posts.length > 0 && <PostList posts={posts}/>}
+
     </>
   );
 }
