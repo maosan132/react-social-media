@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const CreatePost = ({user, setPosts, posts}) => {
   const [content, setContent] = React.useState({
@@ -6,6 +6,7 @@ const CreatePost = ({user, setPosts, posts}) => {
     body: ''
   });
   const [image, setImage] = React.useState(null);
+  const inputImageRef = React.useRef()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const CreatePost = ({user, setPosts, posts}) => {
     const newPosts = [post, ...posts];
     setPosts(newPosts);
     setContent({title: '', body: ''});
+    inputImageRef.current.value = '';
   }
 
   return (
@@ -35,6 +37,7 @@ const CreatePost = ({user, setPosts, posts}) => {
         <input
         type="file"
         onChange={e => setImage(e.target.files[0])}
+        ref={inputImageRef}
         /><br /><br />
         <button type="submit">Submit post </button>
       </form>
