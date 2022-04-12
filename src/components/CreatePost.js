@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
-const CreatePost = ({user, setPosts, posts}) => {
+const CreatePost = ({user, handleAddPost}) => { //removed posts and setPost props
   const [content, setContent] = React.useState({
     title: '',
     body: ''
@@ -11,8 +11,9 @@ const CreatePost = ({user, setPosts, posts}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const post = {content, image, user};
-    const newPosts = [post, ...posts];
-    setPosts(newPosts);
+    // const newPosts = [post, ...posts];
+    // setPosts(newPosts);
+    handleAddPost(post); // instead of setPosts, and lift it to App
     setContent({title: '', body: ''});
     inputImageRef.current.value = '';
   }

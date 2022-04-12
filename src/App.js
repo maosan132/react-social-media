@@ -14,6 +14,10 @@ const App = () => {
     document.title = user ? `Welcome, ${user}!` : 'React User';
   }, [user]);
 
+  const handleAddPost = newPost => {
+    setPosts([newPost, ...posts])
+  };
+
   if (!user) {
     return <Login setUser={setUser}/>;
   }
@@ -21,7 +25,7 @@ const App = () => {
   return (
     <>
       <Header user={user} setUser={setUser}/>
-      <CreatePost user={user} setPosts={setPosts} posts={posts}/>
+      <CreatePost user={user} handleAddPost={handleAddPost}/>
       {posts.length > 0 && <PostList posts={posts}/>}
     </>
   );

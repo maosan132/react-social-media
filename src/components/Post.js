@@ -10,6 +10,7 @@ const Post = ({image, content, user}) => {
       />}
       <p>{content.title}</p>
       <p>{content.body}</p>
+      <p>by: {user}</p>
     </div>
   );
 }
